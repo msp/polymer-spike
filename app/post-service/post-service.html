@@ -56,19 +56,22 @@
     </style>
     <core-ajax id="ajax"
       auto
-      url="../api/posts.json"
+      url="../api/etsy.json"
       on-core-response="{{postsLoaded}}"
       handleAs="json">
     </core-ajax>
   </template>
   <script>
+  // https://openapi.etsy.com/v2/shops/5527948/listings/active?api_key=dr8wqs1kjbz61772j9n1ypt7&includes=MainImage
   Polymer('post-service', {
     created: function() {
       this.posts = [];
     },
     postsLoaded: function() {
+      // console.log(this.$.ajax.response);
       // Make a copy of the loaded data
-      this.posts = this.$.ajax.response.slice(0);
+      this.posts = this.$.ajax.response.results;
+      console.log(this.posts);
     },
     /**
      * Update the service with the current favorite value.
